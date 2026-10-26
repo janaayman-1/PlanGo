@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlanGo | Premium Startup Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Plan<span>Go</span></div>
+        <ul class="nav-links">
+            <li><a href="#" onclick="showPage('home')">Home</a></li>
+            <li><a href="#" onclick="showPage('ideas')">Project Ideas</a></li>
+            <li><a href="#" onclick="showPage('guidance')">Guidance</a></li>
+            <li><a href="#" onclick="showPage('mentor')">AI Mentor</a></li>
+            <li><a href="#" onclick="showPage('dashboard')">Dashboard</a></li>
+            <li><a href="#" onclick="showPage('investors')">Investors</a></li>
+            <li><a href="#" onclick="showPage('help')">Help</a></li>
+        </ul>
+        <div class="nav-auth">
+            <button class="btn-secondary" onclick="showPage('auth')">Login</button>
+            <button class="btn-primary" onclick="showPage('auth')">Sign Up</button>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <section id="home" class="page active">
+            <div class="hero">
+                <h1>Build Your <span class="text-gradient">Future</span> Startup</h1>
+                <p>The elite ecosystem for entrepreneurs to find innovative ideas and reach global investors.</p>
+                <div class="hero-btns">
+                    <button class="btn-primary" onclick="showPage('ideas')">Get Started</button>
+                    <button class="btn-outline" onclick="showPage('guidance')">How it works</button>
+                </div>
+            </div>
+
+            <div class="section-container">
+                <h2 class="section-title" style="text-align: center; margin-bottom: 30px;">Why PlanGo?</h2>
+                <div class="grid-3">
+                    <div class="glass-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>Fresh Ideas</h3>
+                        <p>Curated list of unimplemented, profitable startup concepts.</p>
+                    </div>
+                    <div class="glass-card">
+                        <i class="fas fa-robot"></i>
+                        <h3>AI Mentor</h3>
+                        <p>24/7 strategic advice and instant problem solving for your business.</p>
+                    </div>
+                    <div class="glass-card">
+                        <i class="fas fa-handshake"></i>
+                        <h3>Investor Network</h3>
+                        <p>Direct bridge between visionaries and capital providers.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mentor" class="page">
+            <div class="page-header">
+                <h2>AI Business <span class="text-gradient">Mentor</span></h2>
+                <p>Your strategic partner available 24/7 to solve problems and scale your vision.</p>
+            </div>
+            
+            <div class="mentor-container glass-card">
+                <div class="chat-window" id="chat-window">
+                    <div class="message ai-message">
+                        Hello! I am your PlanGo AI Mentor. How can I help you with your business strategy today?
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="mentor-input" placeholder="Ask about marketing, budget, or scaling...">
+                    <button class="btn-primary" onclick="askMentor()"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="dashboard" class="page">
+            <div class="page-header">
+                <h2 style="text-align: center;">Project <span class="text-gradient">Dashboard</span></h2>
+                <p style="text-align: center;">Monitor expenses, revenues, and progress. AI-driven task distribution and reminders.</p>
+            </div>
+
+            <div class="grid-3" style="margin-bottom: 30px;">
+                <div class="glass-card" style="text-align: center; padding: 25px;">
+                    <i class="fas fa-wallet" style="font-size: 1.5rem; color: #ff4d4d;"></i>
+                    <h3>Expenses</h3>
+                    <p id="dash-expenses" style="font-size: 1.8rem; font-weight: 800;">$0</p>
+                </div>
+                <div class="glass-card" style="text-align: center; padding: 25px;">
+                    <i class="fas fa-chart-line" style="font-size: 1.5rem; color: #4dff88;"></i>
+                    <h3>Revenues</h3>
+                    <p id="dash-revenues" style="font-size: 1.8rem; font-weight: 800;">$0</p>
+                </div>
+                <div class="glass-card" style="text-align: center; padding: 25px;">
+                    <i class="fas fa-spinner" style="font-size: 1.5rem; color: var(--primary-teal);"></i>
+                    <h3>Progress</h3>
+                    <p id="dash-progress" style="font-size: 1.8rem; font-weight: 800;">0%</p>
+                </div>
+            </div>
+
+            <div class="dashboard-grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: 25px;">
+                <div class="glass-card">
+                    <h3><i class="fas fa-robot"></i> AI Tasks Distribution</h3>
+                    <div id="ai-tasks-list" style="margin-top: 15px;"></div>
+                </div>
+                <div class="glass-card">
+                    <h3><i class="fas fa-bell"></i> Reminders</h3>
+                    <div id="deadlines-list" style="margin-top: 15px;"></div>
+                    <button class="btn-primary" style="width: 100%; margin-top: 20px;" onclick="generateAIReport()">Performance Report</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="ideas" class="page">
+            <div class="page-header">
+                <h2>Explore <span class="text-gradient">Ideas</span></h2>
+                <div class="glass-card" style="max-width: 800px; margin: 20px auto;">
+                    <form id="user-form" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: left;">
+                        <div class="form-group">
+                            <label>Skills</label>
+                            <input type="text" id="skills" placeholder="e.g. Design, Coding">
+                        </div>
+                        <div class="form-group">
+                            <label>Education</label>
+                            <input type="text" id="edu" placeholder="Your degree">
+                        </div>
+                        <div class="form-group">
+                            <label>Age</label>
+                            <input type="number" id="age" placeholder="Age">
+                        </div>
+                        <div class="form-group">
+                            <label>Budget ($)</label>
+                            <input type="number" id="budget" placeholder="Max Budget">
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" id="location" placeholder="City">
+                        </div>
+                        <div class="form-group">
+                            <label>Industry</label>
+                            <select id="industry">
+                                <option value="All">All Industries</option>
+                                <option value="Tech">Tech</option>
+                                <option value="Fintech">Fintech</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="grid-column: span 2; display: flex; align-items: center; gap: 10px;">
+                            <input type="checkbox" id="investor-check" style="width: auto;">
+                            <label style="margin-bottom: 0;">Connect with investor?</label>
+                        </div>
+                        <button type="button" class="btn-primary" style="grid-column: span 2;" onclick="renderIdeas()">Generate Ideas</button>
+                    </form>
+                </div>
+            </div>
+            <div class="grid-3" id="ideas-list"></div>
+        </section>
+
+        <section id="guidance" class="page">
+            <div class="page-header">
+                <h2>Business <span class="text-gradient">Guidance</span></h2>
+                <p>Smart guidance based on your project idea to help users launch and manage businesses successfully.</p>
+            </div>
+            <div class="roadmap-container">
+                <div class="step-card">
+                    <span class="step-badge">1</span>
+                    <div class="step-content">
+                        <h3>Choose the Right Business Idea</h3>
+                        <p>Analyze your skills, budget, interests, and available time to select the most suitable and profitable project.</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <span class="step-badge">2</span>
+                    <div class="step-content">
+                        <h3>Build a Clear Project Plan</h3>
+                        <p>Create a step-by-step plan including estimated costs, timeline, required resources, and target customers.</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <span class="step-badge">3</span>
+                    <div class="step-content">
+                        <h3>Secure Funding Options</h3>
+                        <p>Explore investors, partnerships, small loans, or low-budget alternatives that match your financial capacity.</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <span class="step-badge">4</span>
+                    <div class="step-content">
+                        <h3>Launch and Manage Smartly</h3>
+                        <p>Track expenses, revenues, tasks, deadlines, and team productivity through an organized dashboard.</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <span class="step-badge">5</span>
+                    <div class="step-content">
+                        <h3>Improve and Grow</h3>
+                        <p>Use reports, feedback, and market analysis to improve performance and expand your business over time.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="investors" class="page">
+            <div class="page-header"><h2>Investor Network</h2></div>
+            <div class="grid-3" id="investors-list"></div>
+        </section>
+
+        <section id="help" class="page">
+            <div class="page-header"><h2>How can we help?</h2></div>
+            <div class="help-grid">
+                <div class="glass-card" style="margin-bottom: 20px;">
+                    <h3>FAQ</h3>
+                    <p>Find answers to common questions instantly.</p>
+                </div>
+                <div class="glass-card contact-box">
+                    <h3>Contact Support</h3>
+                    <input type="text" placeholder="Your Name" style="margin-bottom: 10px;">
+                    <textarea placeholder="How can we help?" style="width: 100%; height: 100px; background: #000; border: 1px solid var(--border); border-radius: 8px; color: white; padding: 10px;"></textarea>
+                    <button class="btn-primary" style="margin-top: 10px; width: 100%;">Send Request</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="auth" class="page">
+            <div class="auth-box glass-card" style="max-width: 400px; margin: 0 auto; text-align: center;">
+                <h2 id="auth-title">Login to PlanGo</h2>
+                <div class="form-group">
+                    <input type="email" placeholder="Email Address" style="margin-bottom: 10px; width: 100%;">
+                    <input type="password" placeholder="Password" style="margin-bottom: 10px; width: 100%;">
+                </div>
+                <!-- الزرار الذي تم ربطه بالجافا سكريبت -->
+                <button class="btn-primary" style="width: 100%;" onclick="handleLogin()">Continue</button>
+                <p class="toggle-text" onclick="toggleAuth()" style="margin-top: 15px; cursor: pointer;">Don't have an account? <span style="color: var(--primary-teal);">Sign Up</span></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-wrap">
+            <div class="logo">Plan<span>Go</span></div>
+            <p>Empowering the next generation of founders.</p>
+            <div class="footer-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
